@@ -28,6 +28,18 @@ public class ExcelPOIAssignment {
 
         };
 
+        XSSFSheet sheet1 = workbook.createSheet("Department Data");
+
+        Object[][] DeptData = {
+                {"DeptNum", "DeptName","DeptLocation"},
+                {"10", "Dept10", "India"},
+                {"20", "Dept20", "UK"},
+                {"30", "Dept30", "USA"},
+                {"40", "Dept40", "Japan"},
+                {"50", "Dept50", "Russia"},
+
+        };
+
 
         System.out.println("Creating and Printing excel");
 
@@ -37,6 +49,26 @@ public class ExcelPOIAssignment {
             Row row = sheet.createRow(rowNum++);
             int colNum = 0;
             for (Object field : EmpData1) {
+                Cell cell = row.createCell(colNum++);
+                if (field instanceof String)
+                {
+                    cell.setCellValue((String) field);
+                    System.out.print(cell.getStringCellValue()+" ");
+                } else if (field instanceof Integer)
+                {
+                    cell.setCellValue((Integer) field);
+                    System.out.print(cell.getNumericCellValue()+" ");
+                }
+            }
+            System.out.println();
+        }
+
+        int rowNum1 = 0;
+
+        for (Object[] Deptdata1 : DeptData) {
+            Row row = sheet1.createRow(rowNum1++);
+            int colNum = 0;
+            for (Object field : Deptdata1) {
                 Cell cell = row.createCell(colNum++);
                 if (field instanceof String)
                 {
